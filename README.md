@@ -6,7 +6,14 @@ Multi_Camera_Calibration library can be used for multi camera calibration. It ma
 ![image](Readme_Image/CSI.png)  
 2. Optimization of calibration board morphology under multi camera constraints  
 ![image](Readme_Image/3D.png)  
-3. Output corner data and calibration results (*.csv/*.mat/*.txt/*.msdata).The format of the msdata file has been defined in Format_Document.h.  
+3. Output corner data and calibration results (*.csv/*.mat/*.txt/*.msdata).The format of the msdata file has been defined in Format_Document.h.
+  
+  
+Dependency library:  
+1. Ceres  
+2. Opencv  
+3. Matlab (only for *.MAT file output supported)
+  
   
 There is still a portion of the work that needs to be waited for:  
 1. The module supporting speckle calibration board needs to be updated after the paper is publicly published.  
