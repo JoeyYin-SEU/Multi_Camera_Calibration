@@ -1,0 +1,3938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Camera_calibration_moduleClass</class>
+ <widget class="QMainWindow" name="Camera_calibration_moduleClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1184</width>
+    <height>881</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Camera_calibration_module</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Camera_calibration_module.qrc">
+    <normaloff>:/Camera_calibration_module/icon/pet.ico</normaloff>:/Camera_calibration_module/icon/pet.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_47">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_43">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_79" stretch="0,0,1">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_Left" stretch="0,0,0,1,0,1,0,0,0">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_82" stretch="0,1,0,0,1,0,0,1">
+            <item>
+             <widget class="QLabel" name="group_number_label">
+              <property name="text">
+               <string>Group Number:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="group_number_spinBox">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>36</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="camera_number_label">
+              <property name="text">
+               <string>Cameras Number:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="camera_number_spinBox">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>36</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="target_label">
+              <property name="text">
+               <string>Target:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="target_comboBox">
+              <item>
+               <property name="text">
+                <string>Chess</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Circle (Not Supported)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Pos-Circle</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Speckle (Updating)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="target_stackedWidget">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="page_3">
+             <layout class="QGridLayout" name="gridLayout_41">
+              <item row="0" column="0">
+               <widget class="QLabel" name="split_label_4">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(0, 0, 0);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_84" stretch="0,1,0,1,0,1,0,1,0">
+                <item>
+                 <widget class="QLabel" name="chess_width_label">
+                  <property name="text">
+                   <string>Width/Height Size:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="chess_width_size_spinBox">
+                  <property name="maximum">
+                   <number>999</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="chess_height_label">
+                  <property name="text">
+                   <string>/</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="chess_height_size_spinBox">
+                  <property name="maximum">
+                   <number>999</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="chess_width_label_2">
+                  <property name="text">
+                   <string>Wid/Hei Dot Length:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="chess_width_length_doubleSpinBox">
+                  <property name="decimals">
+                   <number>3</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.001000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>999.999000000000024</double>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="chess_width_label_3">
+                  <property name="text">
+                   <string>/</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="chess_height_length_doubleSpinBox">
+                  <property name="decimals">
+                   <number>3</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.001000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>999.990000000000009</double>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="chess_height_label_3">
+                  <property name="text">
+                   <string>mm</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="split_label_5">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(0, 0, 0);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="page_4">
+             <layout class="QGridLayout" name="gridLayout_43">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Working...Please Wait.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="page_10">
+             <layout class="QGridLayout" name="gridLayout_50">
+              <item row="0" column="0">
+               <widget class="QLabel" name="split_label_6">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(0, 0, 0);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <layout class="QVBoxLayout" name="verticalLayout_46">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_87" stretch="0,1,0,1,0,1,0,1,0,0,0,0,0">
+                  <item>
+                   <widget class="QLabel" name="chess_width_label_4">
+                    <property name="text">
+                     <string>Size:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="chess_width_size_oricircle_spinBox">
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>12</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_height_label_2">
+                    <property name="text">
+                     <string>/</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="chess_height_size_oricircle_spinBox">
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>9</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_width_label_5">
+                    <property name="text">
+                     <string>Length:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QDoubleSpinBox" name="chess_width_length_oricircle_doubleSpinBox">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>1.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>999.999000000000024</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_width_label_6">
+                    <property name="text">
+                     <string>/</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QDoubleSpinBox" name="chess_height_length_oricircle_doubleSpinBox">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>1.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>999.990000000000009</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_height_label_4">
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_width_label_7">
+                    <property name="text">
+                     <string>Offset:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="offset_width_size_oricircle_spinBox">
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>1</number>
+                    </property>
+                    <property name="value">
+                     <number>2</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_height_label_5">
+                    <property name="text">
+                     <string>/</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="offset_height_size_oricircle_spinBox">
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>2</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_88" stretch="0,1,0,1,0,1,0,1,0,0">
+                  <item>
+                   <widget class="QLabel" name="chess_width_label_8">
+                    <property name="text">
+                     <string>Incre:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="circle_incre_width_size_oricircle_spinBox">
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>7</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="chess_height_label_6">
+                    <property name="text">
+                     <string>/</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="circle_incre_height_size_oricircle_spinBox">
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="MIN_MAX_R_label">
+                    <property name="text">
+                     <string>MinR/MaxR:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="min_R_spinBox">
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>9999</number>
+                    </property>
+                    <property name="value">
+                     <number>5</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="MIN_MAX_R_label_2">
+                    <property name="text">
+                     <string>/</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="max_R_spinBox">
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>9999</number>
+                    </property>
+                    <property name="value">
+                     <number>50</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="max_error_label">
+                    <property name="text">
+                     <string>Max Error:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QDoubleSpinBox" name="max_error_doubleSpinBox">
+                    <property name="decimals">
+                     <number>1</number>
+                    </property>
+                    <property name="minimum">
+                     <double>0.100000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>50.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>0.500000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_89" stretch="0,1,0,1,0,1,0,1,0,1">
+                  <item>
+                   <widget class="QLabel" name="ratio_k_label">
+                    <property name="text">
+                     <string>Radius_K:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QDoubleSpinBox" name="radius_k_doubleSpinBox">
+                    <property name="minimum">
+                     <double>1.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>10.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>2.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="max_ratio_label">
+                    <property name="text">
+                     <string>Max Ratio:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="max_ratio_spinBox">
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>10</number>
+                    </property>
+                    <property name="value">
+                     <number>3</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="Min_arc_label">
+                    <property name="text">
+                     <string>Min arc:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="max_arc_spinBox">
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>360</number>
+                    </property>
+                    <property name="value">
+                     <number>240</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="Min_keypoint_label">
+                    <property name="text">
+                     <string>Min KP:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="max_KP_spinBox">
+                    <property name="minimum">
+                     <number>3</number>
+                    </property>
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="Min_keypoint_label_2">
+                    <property name="text">
+                     <string>Min P:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="max_P_spinBox">
+                    <property name="minimum">
+                     <number>6</number>
+                    </property>
+                    <property name="maximum">
+                     <number>999</number>
+                    </property>
+                    <property name="value">
+                     <number>20</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="split_label_7">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>2</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(0, 0, 0);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="page_11">
+             <layout class="QGridLayout" name="gridLayout_49">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Working...Please Wait.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QLabel" name="calibration_method_label">
+                <property name="text">
+                 <string>Calibration Method:</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QComboBox" name="calibration_method_comboBox">
+                <item>
+                 <property name="text">
+                  <string>General</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="load_data_groupBox">
+            <property name="title">
+             <string>Load Data</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QRadioButton" name="data_image_radioButton">
+                   <property name="text">
+                    <string>Images</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="data_keypoint_radioButton">
+                   <property name="text">
+                    <string>KeyPoints</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QStackedWidget" name="load_data_stackedWidget">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                 <property name="lineWidth">
+                  <number>1</number>
+                 </property>
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <widget class="QWidget" name="page">
+                  <layout class="QGridLayout" name="gridLayout_2">
+                   <item row="0" column="0">
+                    <widget class="QScrollArea" name="scrollArea">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
+                     </property>
+                     <property name="widgetResizable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>494</width>
+                        <height>2114</height>
+                       </rect>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_9">
+                       <item row="0" column="0">
+                        <layout class="QVBoxLayout" name="verticalLayout_11">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_1">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_3">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_5">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_1">
+                                  <property name="text">
+                                   <string>Camera_001:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_1"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_1">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_1">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_1">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_2">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_4">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_6">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_2">
+                                  <property name="text">
+                                   <string>Camera_002:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_2"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_2">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_2">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_2">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_3">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_5">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_7">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_3">
+                                  <property name="text">
+                                   <string>Camera_003:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_3"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_3">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_3">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_3">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_4">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_6">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_8">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_4">
+                                  <property name="text">
+                                   <string>Camera_004:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_4"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_4">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_4">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_4">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_5">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_7">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_9">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_5">
+                                  <property name="text">
+                                   <string>Camera_005:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_5"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_5">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_5">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_5">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_6">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_8">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_10">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_6">
+                                  <property name="text">
+                                   <string>Camera_006:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_6"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_6">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_6">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_16">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_6">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_7">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_10">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_12">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_7">
+                                  <property name="text">
+                                   <string>Camera_007:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_7"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_7">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_7">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_7">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_8">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_11">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_13">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_8">
+                                  <property name="text">
+                                   <string>Camera_008:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_8"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_8">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_8">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_20">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_8">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_9">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_12">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_14">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_9">
+                                  <property name="text">
+                                   <string>Camera_009:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_9"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_9">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_9">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_22">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_9">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_10">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_13">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_15">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_10">
+                                  <property name="text">
+                                   <string>Camera_010:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_10"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_10">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_10">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_24">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_10">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_11">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_14">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_16">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_25" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_11">
+                                  <property name="text">
+                                   <string>Camera_011:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_11"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_11">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_11">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_26">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_11">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_12">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_15">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_17">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_27" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_12">
+                                  <property name="text">
+                                   <string>Camera_012:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_12"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_12">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_12">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_28">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_12">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_13">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_16">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_18">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_29" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_13">
+                                  <property name="text">
+                                   <string>Camera_013:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_13"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_13">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_13">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_30">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_13">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_14">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_17">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_19">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_31" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_14">
+                                  <property name="text">
+                                   <string>Camera_014:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_14"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_14">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_14">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_32">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_14">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_15">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_18">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_20">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_33" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_15">
+                                  <property name="text">
+                                   <string>Camera_015:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_15"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_15">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_15">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_34">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_15">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_16">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_19">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_21">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_16">
+                                  <property name="text">
+                                   <string>Camera_016:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_16"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_16">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_16">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_36">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_16">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_17">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_20">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_22">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_37" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_17">
+                                  <property name="text">
+                                   <string>Camera_017:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_17"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_17">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_17">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_38">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_17">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_18">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_21">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_23">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_39" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_18">
+                                  <property name="text">
+                                   <string>Camera_018:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_18"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_18">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_18">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_40">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_18">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_19">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_22">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_24">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_41" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_19">
+                                  <property name="text">
+                                   <string>Camera_019:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_19"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_19">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_19">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_42">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_19">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_20">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_23">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_25">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_43" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_20">
+                                  <property name="text">
+                                   <string>Camera_020:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_20"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_20">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_20">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_44">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_20">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_21">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_24">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_26">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_45" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_21">
+                                  <property name="text">
+                                   <string>Camera_021:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_21"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_21">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_21">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_46">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_21">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_22">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_25">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_27">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_47" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_22">
+                                  <property name="text">
+                                   <string>Camera_022:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_22"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_22">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_22">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_48">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_22">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_23">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_26">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_28">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_49" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_23">
+                                  <property name="text">
+                                   <string>Camera_023:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_23"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_23">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_23">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_50">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_23">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_24">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_27">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_29">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_51" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_24">
+                                  <property name="text">
+                                   <string>Camera_024:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_24"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_24">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_24">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_52">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_24">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_25">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_28">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_30">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_53" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_25">
+                                  <property name="text">
+                                   <string>Camera_025:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_25"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_25">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_25">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_54">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_25">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_26">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_29">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_31">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_55" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_26">
+                                  <property name="text">
+                                   <string>Camera_026:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_26"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_26">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_26">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_56">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_26">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_27">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_30">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_32">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_57" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_27">
+                                  <property name="text">
+                                   <string>Camera_027:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_27"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_27">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_27">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_58">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_27">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_28">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_31">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_33">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_59" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_28">
+                                  <property name="text">
+                                   <string>Camera_028:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_28"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_28">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_28">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_60">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_28">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_29">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_32">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_34">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_61" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_29">
+                                  <property name="text">
+                                   <string>Camera_029:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_29"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_29">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_29">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_62">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_29">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_30">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_33">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_35">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_63" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_30">
+                                  <property name="text">
+                                   <string>Camera_030:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_30"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_30">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_30">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_64">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_30">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_31">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_34">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_36">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_65" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_31">
+                                  <property name="text">
+                                   <string>Camera_031:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_31"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_31">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_31">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_66">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_31">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_32">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_35">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_37">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_67" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_32">
+                                  <property name="text">
+                                   <string>Camera_032:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_32"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_32">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_32">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_68">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_32">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_33">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_36">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_38">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_69" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_33">
+                                  <property name="text">
+                                   <string>Camera_033:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_33"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_33">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_33">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_70">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_33">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_34">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_37">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_39">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_71" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_34">
+                                  <property name="text">
+                                   <string>Camera_034:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_34"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_34">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_34">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_72">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_34">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_35">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_38">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_40">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_73" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_35">
+                                  <property name="text">
+                                   <string>Camera_035:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_35"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_35">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_35">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_74">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_35">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QGroupBox" name="camera_index_groupBox_36">
+                           <property name="title">
+                            <string/>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_39">
+                            <property name="leftMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="spacing">
+                             <number>0</number>
+                            </property>
+                            <item row="0" column="0">
+                             <layout class="QVBoxLayout" name="verticalLayout_41">
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_75" stretch="0,1,0,0">
+                                <item>
+                                 <widget class="QLabel" name="camera_index_label_36">
+                                  <property name="text">
+                                   <string>Camera_036:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QComboBox" name="camera_index_comboBox_36"/>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_pushButton_36">
+                                  <property name="text">
+                                   <string>Load</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="camera_index_clear_pushButton_36">
+                                  <property name="text">
+                                   <string>Clear</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                              <item>
+                               <layout class="QHBoxLayout" name="horizontalLayout_76">
+                                <item>
+                                 <widget class="QLineEdit" name="camera_index_lineEdit_36">
+                                  <property name="enabled">
+                                   <bool>false</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item row="1" column="0">
+                        <spacer name="verticalSpacer_2">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_2">
+                  <layout class="QGridLayout" name="gridLayout_42">
+                   <item row="0" column="0">
+                    <layout class="QVBoxLayout" name="verticalLayout_4">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_85" stretch="1,0">
+                       <item>
+                        <widget class="QLineEdit" name="read_keypoint_lineEdit">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="read_keypoint_pushButton">
+                         <property name="text">
+                          <string>Open</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="clear_keypoint_pushButton">
+                       <property name="text">
+                        <string>Clear</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="curren_group_label">
+              <property name="text">
+               <string>Current group:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="curren_group_spinBox"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="tabletTracking">
+             <bool>true</bool>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustIgnored</enum>
+            </property>
+            <attribute name="horizontalHeaderCascadingSectionResizes">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderCascadingSectionResizes">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderStretchLastSection">
+             <bool>false</bool>
+            </attribute>
+            <row>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </row>
+            <column>
+             <property name="text">
+              <string>Group</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Camera</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Index</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Error</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Path</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="groupinf_label">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_83">
+            <item>
+             <widget class="QCheckBox" name="reproject_error_limit_checkBox">
+              <property name="text">
+               <string>Reprojection error limit</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="reproject_error_limit_doubleSpinBox">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="decimals">
+               <number>4</number>
+              </property>
+              <property name="maximum">
+               <double>999.999900000000025</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_81" stretch="0,1">
+            <item>
+             <widget class="QPushButton" name="camera_model_pushButton">
+              <property name="text">
+               <string>Setting</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="calculate_pushButton">
+              <property name="text">
+               <string>Calculate</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="split_label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>1</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>2</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(0, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_42" stretch="0,1,0,0,0,1">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_77" stretch="0,1">
+            <item>
+             <widget class="QLabel" name="curren_index_label">
+              <property name="text">
+               <string>Current Index:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="curren_index_spinBox"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="CamShowLabel" name="Detect_view">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:1px solid black;
+background-color: rgb(255, 255, 255);
+background-position:center;
+background-repeat:no-repeat;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_78">
+            <item>
+             <widget class="QSlider" name="show_detect_horizontalSlider">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="show_detect_spinBox">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="split_label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>2</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>2</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(0, 0, 0);</string>
+            </property>
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+            <item>
+             <widget class="QLabel" name="show_plot_label">
+              <property name="text">
+               <string>Showing Draw:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="show_plot_comboBox">
+              <item>
+               <property name="text">
+                <string>Re-Projection Error Histogram</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Re-Projection Error Pixel Map</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Iteration - Cost</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Optimized Calibration Target Morphology</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Stability</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="plot_result_stackedWidget">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="page_5">
+             <layout class="QGridLayout" name="gridLayout_40">
+              <item row="0" column="0">
+               <widget class="QCustomPlot" name="show_customplot" native="true"/>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="page_9">
+             <layout class="QGridLayout" name="gridLayout_48">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_for_scatter"/>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="page_6">
+             <layout class="QGridLayout" name="gridLayout_45">
+              <item row="0" column="0">
+               <layout class="QVBoxLayout" name="verticalLayout_44">
+                <item>
+                 <widget class="QComboBox" name="verify_stable_comboBox"/>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_86">
+                  <item>
+                   <widget class="QRadioButton" name="fx_fy_radioButton">
+                    <property name="text">
+                     <string>Focus</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="cx_cy_radioButton">
+                    <property name="text">
+                     <string>Center</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="k1_k2_k3_radioButton">
+                    <property name="text">
+                     <string>K1-K3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="k4_k5_k6_radioButton">
+                    <property name="text">
+                     <string>K4-K6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="p1_p2_radioButton">
+                    <property name="text">
+                     <string>P1-P2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="s1_s2_radioButton">
+                    <property name="text">
+                     <string>S1-S2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="s3_s4_radioButton">
+                    <property name="text">
+                     <string>S3-S4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="Overall_R_radioButton">
+                    <property name="text">
+                     <string>R</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="Overall_T_radioButton">
+                    <property name="text">
+                     <string>T</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="shear_radioButton">
+                    <property name="text">
+                     <string>Skew</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QStackedWidget" name="stackedWidget">
+                  <property name="currentIndex">
+                   <number>0</number>
+                  </property>
+                  <widget class="QWidget" name="page_7">
+                   <layout class="QGridLayout" name="gridLayout_44">
+                    <item row="0" column="0">
+                     <widget class="QCustomPlot" name="show_stable_customplot" native="true"/>
+                    </item>
+                   </layout>
+                  </widget>
+                  <widget class="QWidget" name="page_8">
+                   <layout class="QGridLayout" name="gridLayout_46">
+                    <item row="0" column="0">
+                     <layout class="QVBoxLayout" name="verticalLayout_45" stretch="0,1">
+                      <item>
+                       <widget class="QLabel" name="label_for_scatter_stable">
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QGridLayout" name="gridLayout_for_scatter_stable"/>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="split_label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>2</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>2</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_80" stretch="0,0,0,0,1">
+        <item>
+         <widget class="QPushButton" name="ViewReport_pushButton">
+          <property name="text">
+           <string>View Report</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="save_keypoint_checkBox">
+          <property name="text">
+           <string>KeyPoints</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="save_calibrate_checkBox">
+          <property name="text">
+           <string>Calibration Result</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="save_type_comboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>0</height>
+           </size>
+          </property>
+          <item>
+           <property name="text">
+            <string>MSDATA</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>CSV</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>TXT</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>MAT</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="export_pushButton">
+          <property name="text">
+           <string>Export</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1184</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuProject">
+    <property name="title">
+     <string>Project</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+   </widget>
+   <widget class="QMenu" name="menuOpen">
+    <property name="title">
+     <string>Open</string>
+    </property>
+    <addaction name="actionKeyPoints"/>
+    <addaction name="actionResults"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string>Language</string>
+    </property>
+    <addaction name="actionChinese"/>
+    <addaction name="actionTraditional_Chinese"/>
+    <addaction name="actionEnglish"/>
+   </widget>
+   <addaction name="menuProject"/>
+   <addaction name="menuOpen"/>
+   <addaction name="menuHelp"/>
+   <addaction name="menuLanguage"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionKeyPoints">
+   <property name="text">
+    <string>KeyPoints</string>
+   </property>
+  </action>
+  <action name="actionResults">
+   <property name="text">
+    <string>Calibration Result</string>
+   </property>
+  </action>
+  <action name="actionChinese">
+   <property name="text">
+    <string>中文简体</string>
+   </property>
+  </action>
+  <action name="actionTraditional_Chinese">
+   <property name="text">
+    <string>中文繁體</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CamShowLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">C:/Project_VS/PET_module/Camera_claibration_module/Camera_calibration_module/Camera_calibration_module/Camera_op/camshowlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header location="global">C:/Project_VS/PET_module/Camera_claibration_module/Camera_calibration_module/Camera_calibration_module/plot_show/qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="Camera_calibration_module.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/Camera_calibration_module">
+        <file>icon/camera_drog.png</file>
+        <file>icon/FLIR logo.png</file>
+        <file>icon/Fp.ico</file>
+        <file>icon/Hikvision logo.svg</file>
+        <file>icon/Hikvision-logo.png</file>
+        <file>icon/ids logo.svg</file>
+        <file>icon/ids-logo.png</file>
+        <file>icon/kaya-logo.png</file>
+        <file>icon/no_camera.png</file>
+        <file>icon/pet.ico</file>
+        <file>icon/RXY.bmp</file>
+        <file>icon/texas logo.svg</file>
+        <file>icon/texas-logo.png</file>
+    </qresource>
+</RCC>
