@@ -3769,67 +3769,6 @@ void Camera_calibration_module::calibration_cameras()
 							}
 						}
 
-						//cv::Point2f old_point_1 = corner_points_cur[(offset_hei -1) * circle_wid + offset_wid - 1];
-						//cv::Point2f old_point_2 = corner_points_cur[(offset_hei - 1) * circle_wid + offset_wid + incre_wid - 1];
-						//cv::Point2f old_point_3 = corner_points_cur[(offset_hei + incre_hei - 1) * circle_wid + offset_wid + incre_wid - 1];
-						//cv::Point2f old_point_4 = corner_points_cur[(offset_hei + incre_hei - 1) * circle_wid + offset_wid - 1];
-						//cv::Point2f new_point_1;
-						//cv::Point2f new_point_2;
-						//cv::Point2f new_point_3;
-						//cv::Point2f new_point_4;
-						//double ans_1 = (old_point_2.x - old_point_1.x) * (old_point_3.y - old_point_1.y) - (old_point_2.y - old_point_1.y) * (old_point_3.x - old_point_1.x);
-						//double ans_2 = (old_point_3.x - old_point_2.x) * (old_point_4.y - old_point_2.y) - (old_point_3.y - old_point_2.y) * (old_point_4.x - old_point_2.x);
-						//double ans_3 = (old_point_4.x - old_point_3.x) * (old_point_1.y - old_point_3.y) - (old_point_4.y - old_point_3.y) * (old_point_1.x - old_point_3.x);
-						//double ans_4 = (old_point_1.x - old_point_4.x) * (old_point_2.y - old_point_4.y) - (old_point_1.y - old_point_4.y) * (old_point_2.x - old_point_4.x);
-						//if (ans_1 + ans_2 + ans_3 + ans_4 > 0)
-						//{
-						//	new_point_1 = cv::Point2f(inter_c * offset_wid, inter_c * offset_hei);
-						//	new_point_2 = cv::Point2f(inter_c * (offset_wid + incre_wid), inter_c * offset_hei);
-						//	new_point_3 = cv::Point2f(inter_c * (offset_wid + incre_wid), inter_c * (offset_hei + incre_hei));
-						//	new_point_4 = cv::Point2f(inter_c * (offset_wid), inter_c * (offset_hei + incre_hei));
-						//}
-						//else
-						//{
-						//	new_point_4 = cv::Point2f(inter_c * offset_wid, inter_c * offset_hei);
-						//	new_point_3 = cv::Point2f(inter_c * (offset_wid + incre_wid), inter_c * offset_hei);
-						//	new_point_2 = cv::Point2f(inter_c * (offset_wid + incre_wid), inter_c * (offset_hei + incre_hei));
-						//	new_point_1 = cv::Point2f(inter_c * (offset_wid), inter_c * (offset_hei + incre_hei));
-						//}
-						//cv::Point2f AffinePointsSrc[4] = { old_point_1, old_point_2, old_point_3, old_point_4 };
-						//cv::Point2f AffinePointsDst[4] = { new_point_1, new_point_2, new_point_3, new_point_4 };
-						//cv::Mat Circle_image_New;
-						//cv::Mat per_tf = cv::getPerspectiveTransform(AffinePointsSrc, AffinePointsDst);
-						//cv::warpPerspective(gray_temp, Circle_image_New, per_tf, cv::Size((circle_wid + 1) * inter_c, (circle_hei + 1) * inter_c), CV_INTER_AREA);
-						//corner_points_cur.clear();
-						//found_fin = ImageDetectMethod::FindCircleGrid(Circle_image_New, circle_wid, circle_hei,
-						//	offset_wid, offset_hei, incre_wid, incre_hei,
-						//	corner_points_cur, list, useful_corner_num, edge_points, ui.max_ratio_spinBox->value(), 1.0 / ui.radius_k_doubleSpinBox->value()
-						//	, ui.min_R_spinBox->value() * r_multi, ui.max_R_spinBox->value() * r_multi, ui.max_error_doubleSpinBox->value(), ui.max_arc_spinBox->value(),
-						//	ui.max_P_spinBox->value(), ui.max_KP_spinBox->value());
-						//if (found_fin)
-						//{
-						//	for (unsigned int gg = 0; gg < corner_points_cur.size(); gg++)
-						//	{
-						//		cv::Mat_<double> mat_pt(3, 1);
-						//		mat_pt(0, 0) = corner_points_cur[gg].x;
-						//		mat_pt(1, 0) = corner_points_cur[gg].y;
-						//		mat_pt(2, 0) = 1;
-						//		cv::Mat mat_pt_view = per_tf.inv() * mat_pt;
-						//		double a1 = mat_pt_view.at<double>(0, 0);
-						//		double a2 = mat_pt_view.at<double>(1, 0);
-						//		double a3 = mat_pt_view.at<double>(2, 0);
-						//		double new_x = a1 * 1.0 / a3;
-						//		double new_y = a2 * 1.0 / a3;
-						//		corner_points_cur[gg].x = new_x;
-						//		corner_points_cur[gg].y = new_y;
-						//	}
-						//	checkerboard_size.width = circle_wid + 1;
-						//	checkerboard_size.height = circle_hei + 1;
-						//}
-						//else
-						//{
-						//	corner_points_cur.clear();
-						//}
 					}
 					else
 					{
@@ -7131,16 +7070,27 @@ void Camera_calibration_module::save_KeyPoint_file_csv(QString path_save)
 				txtOutPut << corn_number << ",";
 				txtOutPut << KeyPointWidth_serial[ii][jj] << ",";
 				txtOutPut << KeyPointHeight_serial[ii][jj] << "\n";
+				txtOutPut << "" << "," << "X" << ",";
 				for (int pp = 0; pp < corn_number; pp++)
 				{
 					if (pp == (corn_number - 1))
 					{
-						txtOutPut << KeyPoint_serial[ii][jj][pp].x << ",";
-						txtOutPut << KeyPoint_serial[ii][jj][pp].y << "\n";
+						txtOutPut << KeyPoint_serial[ii][jj][pp].x << "\n";
 					}
 					else
 					{
 						txtOutPut << KeyPoint_serial[ii][jj][pp].x << ",";
+					}
+				}
+				txtOutPut << "" << "," << "Y" << ",";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp == (corn_number - 1))
+					{
+						txtOutPut << KeyPoint_serial[ii][jj][pp].y << "\n";
+					}
+					else
+					{
 						txtOutPut << KeyPoint_serial[ii][jj][pp].y << ",";
 					}
 				}
@@ -7187,16 +7137,27 @@ void Camera_calibration_module::save_KeyPoint_file_txt(QString path_save)
 				txtOutPut << corn_number << "\t";
 				txtOutPut << KeyPointWidth_serial[ii][jj] << "\t";
 				txtOutPut << KeyPointHeight_serial[ii][jj] << "\n";
+				txtOutPut << "" << "\t" << "X" << "\t";
 				for (int pp = 0; pp < corn_number; pp++)
 				{
 					if (pp == (corn_number - 1))
 					{
-						txtOutPut << KeyPoint_serial[ii][jj][pp].x << "\t";
-						txtOutPut << KeyPoint_serial[ii][jj][pp].y << "\n";
+						txtOutPut << KeyPoint_serial[ii][jj][pp].x << "\n";
 					}
 					else
 					{
 						txtOutPut << KeyPoint_serial[ii][jj][pp].x << "\t";
+					}
+				}
+				txtOutPut << "" << "\t" << "Y" << "\t";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp == (corn_number - 1))
+					{
+						txtOutPut << KeyPoint_serial[ii][jj][pp].y << "\n";
+					}
+					else
+					{
 						txtOutPut << KeyPoint_serial[ii][jj][pp].y << "\t";
 					}
 				}
@@ -7919,6 +7880,103 @@ void Camera_calibration_module::save_CalibrationeResult_file_csv(QString path_sa
 			txtOutPut << "," << Result_update_calib_points[has_found][jj].z;
 		}
 		txtOutPut << "\n";
+		for (int jj = 0; jj < Image_serial_name[has_found].size(); jj++)
+		{
+			txtOutPut << Image_serial_name[has_found][jj].toLocal8Bit() << ",";
+			txtOutPut << ImageWidth_serial[has_found][jj] << ",";
+			txtOutPut << ImageHeight_serial[has_found][jj] << ",";
+			int corn_number = KeyPoint_serial[has_found][jj].size();
+			if (corn_number == KeyPointWidth_serial[has_found][jj] * KeyPointHeight_serial[has_found][jj])
+			{
+				txtOutPut << corn_number << ",";
+				txtOutPut << KeyPointWidth_serial[has_found][jj] << ",";
+				txtOutPut << KeyPointHeight_serial[has_found][jj] << "\n";
+				txtOutPut << "" << "," << "X" << ",";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp == (corn_number - 1))
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].x << "\n";
+					}
+					else
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].x << ",";
+					}
+				}
+				txtOutPut << "" << "," << "Y" << ",";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp == (corn_number - 1))
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].y << "\n";
+					}
+					else
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].y << ",";
+					}
+				}
+				txtOutPut << "" << "," << "Error_x" << ",";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp < Result_Re_map[ii][jj].size())
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].x << "\n";
+						}
+						else
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].x << ",";
+						}
+					}
+					else
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << "-1" << ",";
+						}
+						else
+						{
+							txtOutPut << "-1" << "\n";
+						}
+					}
+				}
+				txtOutPut << "" << "," << "Error_y" << ",";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp < Result_Re_map[ii][jj].size())
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].y << "\n";
+						}
+						else
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].y << ",";
+						}
+					}
+					else
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << "-1" << ",";
+						}
+						else
+						{
+							txtOutPut << "-1" << "\n";
+						}
+					}
+				}
+			}
+			else
+			{
+				txtOutPut << 0 << ",";
+				txtOutPut << 0 << ",";
+				txtOutPut << 0 << "\n";
+				txtOutPut << "\n";
+			}
+		}
+		txtOutPut << "\n";
 	}
 	QMessageBox::information(this, tr("Save Result File"), tr("Save Successfully."), QMessageBox::Ok);
 	file.close();
@@ -8016,6 +8074,103 @@ void Camera_calibration_module::save_CalibrationeResult_file_txt(QString path_sa
 		for (int jj = 0; jj < Result_update_calib_points[has_found].size(); jj++)
 		{
 			txtOutPut << "\t" << Result_update_calib_points[has_found][jj].z;
+		}
+		txtOutPut << "\n";
+		for (int jj = 0; jj < Image_serial_name[has_found].size(); jj++)
+		{
+			txtOutPut << Image_serial_name[has_found][jj].toLocal8Bit() << "\t";
+			txtOutPut << ImageWidth_serial[has_found][jj] << "\t";
+			txtOutPut << ImageHeight_serial[has_found][jj] << "\t";
+			int corn_number = KeyPoint_serial[has_found][jj].size();
+			if (corn_number == KeyPointWidth_serial[has_found][jj] * KeyPointHeight_serial[has_found][jj])
+			{
+				txtOutPut << corn_number << "\t";
+				txtOutPut << KeyPointWidth_serial[has_found][jj] << "\t";
+				txtOutPut << KeyPointHeight_serial[has_found][jj] << "\n";
+				txtOutPut << "" << "\t" << "X" << "\t";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp == (corn_number - 1))
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].x << "\n";
+					}
+					else
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].x << "\t";
+					}
+				}
+				txtOutPut << "" << "\t" << "Y" << "\t";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp == (corn_number - 1))
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].y << "\n";
+					}
+					else
+					{
+						txtOutPut << KeyPoint_serial[has_found][jj][pp].y << "\t";
+					}
+				}
+				txtOutPut << "" << "\t" << "Error_x" << "\t";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp < Result_Re_map[ii][jj].size())
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].x << "\n";
+						}
+						else
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].x << "\t";
+						}
+					}
+					else
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << "-1" << "\t";
+						}
+						else
+						{
+							txtOutPut << "-1" << "\n";
+						}
+					}
+				}
+				txtOutPut << "" << "\t" << "Error_y" << "\t";
+				for (int pp = 0; pp < corn_number; pp++)
+				{
+					if (pp < Result_Re_map[ii][jj].size())
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].y << "\n";
+						}
+						else
+						{
+							txtOutPut << Result_Re_map[ii][jj][pp].y << "\t";
+						}
+					}
+					else
+					{
+						if (pp == (corn_number - 1))
+						{
+							txtOutPut << "-1" << "\t";
+						}
+						else
+						{
+							txtOutPut << "-1" << "\n";
+						}
+					}
+				}
+			}
+			else
+			{
+				txtOutPut << 0 << "\t";
+				txtOutPut << 0 << "\t";
+				txtOutPut << 0 << "\n";
+				txtOutPut << "\n";
+			}
 		}
 		txtOutPut << "\n";
 	}

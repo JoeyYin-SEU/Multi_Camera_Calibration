@@ -380,8 +380,8 @@ cv::Mat ImageDetectMethod::Adaptive_Canny(const cv::Mat& src, int apertureSize, 
 bool ImageDetectMethod::ImagePreprocess(const cv::Mat& ori_image_mat, cv::Mat& processed_image_mat)
 {
 	/////////高斯滤波
-	cv::bilateralFilter(ori_image_mat, processed_image_mat, 9, 50, 25 / 2);
-	//GaussianBlur(ori_image_mat, processed_image_mat, cv::Size(5, 5), 1, 1);
+	//cv::bilateralFilter(ori_image_mat, processed_image_mat, 9, 50, 25 / 2);
+	GaussianBlur(ori_image_mat, processed_image_mat, cv::Size(5, 5), 1, 1);
 	return true;
 }
 bool ImageDetectMethod::DetectClosedContours(const cv::Mat& ori_image_mat, std::vector<std::vector<cv::Point>>& contours, DetectContoursMethod image_process_method)
@@ -1956,6 +1956,86 @@ bool ImageDetectMethod::UncodePointCheck(const cv::Mat& image_mat, float center_
 	}
 	else
 		return true;
+}
+bool ImageDetectMethod::FindSubPixelPosOfCircleCenter_opnecv(const cv::Mat& image_mat, 
+	float center_x, float center_y, float ellipse_a, float ellipse_b,
+	float angle_in_pi, const std::vector<cv::Point>& contour_points,
+	float& sub_pixel_center_x, float& sub_pixel_center_y,
+	std::vector<cv::Point2f>* subpixel_edge_points /*= NULL*/,
+	MarkPointColorType color_type/* = BlackDownWhiteUp*/)
+{
+	float ellipse_a2 = ellipse_a * 1.5;
+	float ellipse_b2 = ellipse_b * 1.5;
+
+	int i_top = 0;
+	int i_bottom = 0;
+	int j_left = 0;
+	int j_right = 0;
+	if (int(center_y - ellipse_b2) < 0)
+	{
+		i_top = 0;
+	}
+	else i_top = int(center_y - ellipse_b2);
+	if (int(center_y + ellipse_b2) > image_mat.rows - 1)
+	{
+		i_bottom = image_mat.rows - 1;
+	}
+	else i_bottom = int(center_y + ellipse_b2);
+	if (int(center_x - ellipse_b2) < 0)
+	{
+		j_left = 0;
+	}
+	else j_left = int(center_x - ellipse_b2);
+	if (int(center_x + ellipse_b2) > image_mat.cols - 1)
+	{
+		j_right = image_mat.cols - 1;
+	}
+	else j_right = int(center_x + ellipse_b2);
+
+	cv::Mat crop_image = image_mat(cv::Range(i_top, i_bottom), cv::Range(j_left, j_right));
+
+	//cv::namedWindow("canny", cv::WINDOW_FREERATIO);
+	//imshow("canny", crop_image);
+	////imwrite("E:\\canny.bmp",show_contours_image);
+	//cv::waitKey(0);
+
+	cv::SimpleBlobDetector::Params params;
+	params.minThreshold = 15;
+	params.maxThreshold = 240;
+	params.thresholdStep = 5;
+	cv::Ptr<cv::SimpleBlobDetector> detector = cv::SimpleBlobDetector::create(params);
+	params.filterByArea = true;
+	params.maxArea = 3.1415 * ellipse_a * ellipse_b / 2.0 / 2.0 * 4.0;
+	params.minArea = 3.1415 * ellipse_a * ellipse_b /2.0 / 2.0 / 4.0;
+	params.blobColor = 0;
+	std::vector<cv::KeyPoint> keypoints;
+	detector->detect(crop_image, keypoints);
+	if (keypoints.size() == 0)
+	{
+		return false;
+	}
+	else
+	{
+		int min_index = 0;
+		float min_value = 1e20;
+		for (int ii = 0; ii < keypoints.size(); ii++)
+		{
+			if (abs((float)i_top + keypoints[ii].pt.x - center_y) + abs((float)j_left + keypoints[ii].pt.y - center_x) < min_value)
+			{
+				min_value = abs((float)i_top + keypoints[ii].pt.x - center_y) + abs((float)j_left + keypoints[ii].pt.y - center_x);
+				min_index = ii;
+			}
+		}
+		sub_pixel_center_y = (float)i_top + keypoints[min_index].pt.y;
+		sub_pixel_center_x = (float)j_left + keypoints[min_index].pt.x;
+	}
+	//if (color_type == BlackDownWhiteUp || color_type == Uncertainty)
+	//{
+
+	//}
+
+
+	return true;
 }
 
 bool ImageDetectMethod::FindSubPixelPosOfCircleCenter20140210(const cv::Mat& image_mat, float center_x, float center_y, float ellipse_a, float ellipse_b,
@@ -3842,15 +3922,26 @@ bool ImageDetectMethod::FindCircleGrid(cv::Mat ori_image, int h_num, int v_num,
 							coners_cost[(i - 1) * h_num + j - 1] = delta_x + delta_y;
 							float sub_pixel_x, sub_pixel_y;
 							std::vector<cv::Point2f> edge_contour;
-							FindSubPixelPosOfCircleCenter20140210(processed_image_mat, ellipse_pars[n][0], ellipse_pars[n][1], ellipse_pars[n][2],
+							if (FindSubPixelPosOfCircleCenter_opnecv(processed_image_mat, ellipse_pars[n][0], ellipse_pars[n][1], ellipse_pars[n][2],
 								ellipse_pars[n][3], ellipse_pars[n][4], contours_copy[ellipse_pars[n][6]], sub_pixel_x, sub_pixel_y,
-								&edge_contour, subpixel_pos_method, Uncertainty);
-							ellipse_pars[n][0] = sub_pixel_x;
-							ellipse_pars[n][1] = sub_pixel_y;
+								&edge_contour, Uncertainty))
+							{
+								ellipse_pars[n][0] = sub_pixel_x;
+								ellipse_pars[n][1] = sub_pixel_y;
+								corners[(i - 1) * h_num + j - 1] = cv::Point2f(sub_pixel_x, sub_pixel_y);
+								sign_list[(i - 1) * h_num + j - 1] = 2;
+							}
+							else
+							{
+								corners[(i - 1) * h_num + j - 1] = cv::Point2f(ellipse_pars[n][0], ellipse_pars[n][1]);
+								sign_list[(i - 1) * h_num + j - 1] = 1;
+							}
+							//FindSubPixelPosOfCircleCenter20140210(processed_image_mat, ellipse_pars[n][0], ellipse_pars[n][1], ellipse_pars[n][2],
+							//	ellipse_pars[n][3], ellipse_pars[n][4], contours_copy[ellipse_pars[n][6]], sub_pixel_x, sub_pixel_y,
+							//	&edge_contour, subpixel_pos_method, Uncertainty);
 							contours_for_key[(i - 1) * h_num + j - 1] = contours_copy[ellipse_pars[n][6]];
-
-							corners[(i - 1) * h_num + j - 1] = cv::Point2f(sub_pixel_x, sub_pixel_y);
-							sign_list[(i - 1) * h_num + j - 1] = 1;
+							//corners[(i - 1) * h_num + j - 1] = cv::Point2f(ellipse_pars[n][0], ellipse_pars[n][1]);
+							sign_list[(i - 1) * h_num + j - 1] = 2;
 							useful_corner_num++;
 						}
 						else if (coners_cost[(i - 1) * h_num + j - 1] < (delta_x + delta_y))
@@ -3862,15 +3953,24 @@ bool ImageDetectMethod::FindCircleGrid(cv::Mat ori_image, int h_num, int v_num,
 							coners_cost[(i - 1) * h_num + j - 1] = delta_x + delta_y;
 							float sub_pixel_x, sub_pixel_y;
 							std::vector<cv::Point2f> edge_contour;
-							FindSubPixelPosOfCircleCenter20140210(processed_image_mat, ellipse_pars[n][0], ellipse_pars[n][1], ellipse_pars[n][2],
+							if (FindSubPixelPosOfCircleCenter_opnecv(processed_image_mat, ellipse_pars[n][0], ellipse_pars[n][1], ellipse_pars[n][2],
 								ellipse_pars[n][3], ellipse_pars[n][4], contours_copy[ellipse_pars[n][6]], sub_pixel_x, sub_pixel_y,
-								&edge_contour, subpixel_pos_method, Uncertainty);
-							ellipse_pars[n][0] = sub_pixel_x;
-							ellipse_pars[n][1] = sub_pixel_y;
+								&edge_contour, Uncertainty))
+							{
+								ellipse_pars[n][0] = sub_pixel_x;
+								ellipse_pars[n][1] = sub_pixel_y;
+								corners[(i - 1) * h_num + j - 1] = cv::Point2f(sub_pixel_x, sub_pixel_y);
+								sign_list[(i - 1) * h_num + j - 1] = 2;
+							}
+							else
+							{
+								corners[(i - 1) * h_num + j - 1] = cv::Point2f(ellipse_pars[n][0], ellipse_pars[n][1]);
+								sign_list[(i - 1) * h_num + j - 1] = 1;
+							}
+							//FindSubPixelPosOfCircleCenter20140210(processed_image_mat, ellipse_pars[n][0], ellipse_pars[n][1], ellipse_pars[n][2],
+							//	ellipse_pars[n][3], ellipse_pars[n][4], contours_copy[ellipse_pars[n][6]], sub_pixel_x, sub_pixel_y,
+							//	&edge_contour, subpixel_pos_method, Uncertainty);
 							contours_for_key[(i - 1) * h_num + j - 1] = contours_copy[ellipse_pars[n][6]];
-
-							corners[(i - 1) * h_num + j - 1] = cv::Point2f(sub_pixel_x, sub_pixel_y);
-							sign_list[(i - 1) * h_num + j - 1] = 1;
 						}
 					}
 					if (useful_corner_num> useful_corner_num_max)
@@ -3880,13 +3980,13 @@ bool ImageDetectMethod::FindCircleGrid(cv::Mat ori_image, int h_num, int v_num,
 					}
 					if (useful_corner_num == (h_num * v_num))
 					{
-						//cv::Mat II = cv::Mat::zeros(ori_image.size(), CV_8UC3);
-						//cv::cvtColor(ori_image, II, CV_GRAY2BGR);
-						////cv::drawContours(II, contours_copy, -1, cv::Scalar(0, 0, 255), 10);
-						//cv::drawContours(II, contours_for_key, -1, cv::Scalar(0, 255, 0), 5);
-						//cv::namedWindow("cannys", cv::WINDOW_NORMAL);
-						//cv::imshow("cannys", II);
-						//cv::waitKey(0);
+						cv::Mat II = cv::Mat::zeros(ori_image.size(), CV_8UC3);
+						cv::cvtColor(ori_image, II, CV_GRAY2BGR);
+						//cv::drawContours(II, contours_copy, -1, cv::Scalar(0, 0, 255), 10);
+						cv::drawContours(II, contours_for_key, -1, cv::Scalar(0, 255, 0), 5);
+						cv::namedWindow("cannys", cv::WINDOW_NORMAL);
+						cv::imshow("cannys", II);
+						cv::waitKey(0);
 						return true;
 					}
 				}

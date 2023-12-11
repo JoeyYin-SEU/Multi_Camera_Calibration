@@ -98,7 +98,7 @@ public:
 		std::vector<std::vector<cv::Point2f>>& edge_points,
 		float max_ratio = 3, float ratio = 0.5,
 		float min_radius = 5, float max_radius = 50, float ellipse_error_pixel = 0.5 , int min_arc = 240, int min_points = 6, int min_contour_num = 8,
-		DetectContoursMethod image_process_method = CANNY_Method, SubPixelPosMethod subpixel_pos_method = Gray_Centroid);
+		DetectContoursMethod image_process_method = CANNY_Method, SubPixelPosMethod subpixel_pos_method = Gauss_Curve_Fit);
 
 
 	//编码点自标定，特征点检测
@@ -194,6 +194,10 @@ private:
 		float ratio_k = 2, MarkPointColorType color_type = BlackDownWhiteUp, CodePointBitesType code_bites_type = CodeBites15);
 
 	//亚像素定位
+	static bool FindSubPixelPosOfCircleCenter_opnecv(const cv::Mat& image_mat, float center_x, float center_y, float ellipse_a, float ellipse_b,
+		float angle_in_pi, const std::vector<cv::Point>& contour_points,
+		float& sub_pixel_center_x, float& sub_pixel_center_y, std::vector<cv::Point2f>* subpixel_edge_points = NULL, MarkPointColorType color_type = BlackDownWhiteUp);
+
 	static bool FindSubPixelPosOfCircleCenter20140210(const cv::Mat& image_mat, float center_x, float center_y, float ellipse_a, float ellipse_b,
 		float angle_in_pi, const std::vector<cv::Point>& contour_points,
 		float& sub_pixel_center_x, float& sub_pixel_center_y, std::vector<cv::Point2f>* subpixel_edge_points = NULL, SubPixelPosMethod subPixel_method = NoSubPixel_Match, MarkPointColorType color_type = BlackDownWhiteUp);

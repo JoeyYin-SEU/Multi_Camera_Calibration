@@ -504,6 +504,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame(int image_width, int image_h
 
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -679,6 +680,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame(int image_width, int image_h
 
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -982,6 +984,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize(int points_nu
 
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -1257,6 +1260,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize(int points_nu
 
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -1448,6 +1452,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_Dual(std::vector<std::vector
 		}
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -1620,6 +1625,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_Dual(std::vector<std::vector
 		}
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -1926,6 +1932,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize_Dual(int poin
 
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
@@ -2225,6 +2232,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize_Dual(int poin
 
 		ceres::Solver::Options options;
 		options.minimizer_progress_to_stdout = false;
+		options.linear_solver_type = ceres::DENSE_SCHUR;
 		options.max_num_iterations = max_iter_num;
 		options.function_tolerance = stop_value;
 		options.gradient_tolerance = stop_value;
