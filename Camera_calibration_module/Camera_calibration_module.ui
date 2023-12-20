@@ -3360,7 +3360,17 @@
             </column>
             <column>
              <property name="text">
-              <string>Error</string>
+              <string>Mean-E</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Median-E</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Max-E</string>
              </property>
             </column>
             <column>

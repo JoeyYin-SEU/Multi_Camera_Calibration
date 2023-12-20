@@ -452,6 +452,8 @@ enum Target_type
 **** for以下循环写入角点
 * X轴像素位置 double 8字节
 * Y轴像素位置 double 8字节
+* 轮廓点数 int 4字节
+* 轮廓值[x,y] 2*int 4字节*轮廓点数
 **** end
 ** end
 */
@@ -509,6 +511,8 @@ enum Target_type
 * Y轴像素位置 double 8字节
 * X轴像素误差 double 8字节
 * Y轴像素误差 double 8字节
+* 轮廓点数 int 4字节
+* 轮廓值[x,y] 2*int 4字节*轮廓点数
 **** end
 *** end
 */

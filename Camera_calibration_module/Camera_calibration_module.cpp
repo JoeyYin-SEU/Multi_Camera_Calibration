@@ -930,6 +930,8 @@ void Camera_calibration_module::open_image_from_bmp()
 	Image_serial_name[cam_index].clear();
 	KeyPoint_Enable_serial[cam_index].clear();
 	KeyPoint_serial[cam_index].clear();
+
+	Result_contours_serial[cam_index].clear();
 	KeyPointWidth_serial[cam_index].clear();
 	KeyPointHeight_serial[cam_index].clear();
 	ImageWidth_serial[cam_index].clear();
@@ -1081,6 +1083,7 @@ void Camera_calibration_module::clear_image_for_camera()
 	Image_serial_name[cam_index].clear();
 	KeyPoint_Enable_serial[cam_index].clear();
 	KeyPoint_serial[cam_index].clear();
+	Result_contours_serial[cam_index].clear();
 	KeyPointWidth_serial[cam_index].clear();
 	KeyPointHeight_serial[cam_index].clear();
 	ImageWidth_serial[cam_index].clear();
@@ -1215,35 +1218,35 @@ void Camera_calibration_module::update_show_view()
 	auto a = Image_serial_name[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1].toLocal8Bit().data();
 	cv::Mat cur_img = cv::imread(Image_serial_name[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1].toLocal8Bit().data());
 
-	if ((ui.show_detect_spinBox->value() - 1) < KeyPoint_serial[ui.curren_index_spinBox->value() - 1].size())
+	if (cur_target_type_cal == Target_type::Chess_Board_type)
 	{
-		if (KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] != 0 &&
-			KeyPointHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] != 0)
+		if ((ui.show_detect_spinBox->value() - 1) < KeyPoint_serial[ui.curren_index_spinBox->value() - 1].size())
 		{
-			if (ui.chess_width_size_spinBox->value() == 0 || ui.chess_height_size_spinBox->value() == 0 ||
-				((ui.chess_width_size_spinBox->value() == KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]) &&
-				(ui.chess_height_size_spinBox->value() == KeyPointHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]))
-				)
+			if (KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] != 0 &&
+				KeyPointHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] != 0)
 			{
-				if (cur_img.empty())
+				if (ui.chess_width_size_spinBox->value() == 0 || ui.chess_height_size_spinBox->value() == 0 ||
+					((ui.chess_width_size_spinBox->value() == KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]) &&
+						(ui.chess_height_size_spinBox->value() == KeyPointHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]))
+					)
 				{
-					if (ImageWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] > 0 &&
-						ImageHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] > 0)
+					if (cur_img.empty())
 					{
-						cur_img = cv::Mat(ImageHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-							, ImageWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1], CV_8UC3, cv::Scalar(255, 255, 255));
+						if (ImageWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] > 0 &&
+							ImageHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] > 0)
+						{
+							cur_img = cv::Mat(ImageHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+								, ImageWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1], CV_8UC3, cv::Scalar(255, 255, 255));
+						}
+						else
+						{
+							ui.Detect_view->clear_image();
+							ui.Detect_view->update();
+							return;
+						}
 					}
-					else
-					{
-						ui.Detect_view->clear_image();
-						ui.Detect_view->update();
-						return;
-					}
-				}
-				double all_number = 0;
-				double draw_R_sum = 0;
-				if (cur_target_type_cal == Target_type::Chess_Board_type)
-				{
+					double all_number = 0;
+					double draw_R_sum = 0;
 					draw_R_sum = sqrt(
 						(KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][0].x
 							- KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][2].x)
@@ -1253,56 +1256,38 @@ void Camera_calibration_module::update_show_view()
 							- KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][2].y)
 						* (KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][1].y
 							- KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][2].y));
-				}
-				else if (cur_target_type_cal == Target_type::Ori_Circle_Board_type)
-				{
-					auto p_1_temp = KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						+ cur_target_offset_for_ori_wid - 1];
-					auto p_2_temp = KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						+ cur_target_offset_for_ori_wid + cur_target_incre_for_ori_wid - 1];
-					auto p_3_temp = KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						[(cur_target_offset_for_ori_hei + cur_target_incre_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						+ cur_target_offset_for_ori_wid - 1];
-					draw_R_sum += sqrt(pow(p_2_temp.x - p_1_temp.x, 2) + pow(p_2_temp.y - p_1_temp.y, 2));
-					draw_R_sum += sqrt(pow(p_3_temp.x - p_1_temp.x, 2) + pow(p_3_temp.x - p_1_temp.y, 2));
-					draw_R_sum /= (double)(cur_target_incre_for_ori_hei + cur_target_incre_for_ori_wid);
-				}
-				double draw_R = draw_R_sum / 5;
-				draw_R = draw_R < 5 ? 5 : draw_R;
-				double draw_thick = draw_R / 2;
-				draw_thick = draw_thick < 1 ? 1 : draw_thick;
-				for (int pp = 0; pp < KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1].size(); pp++)
-				{
-					if (KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp].x != 0 &&
-						KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp].y != 0)
-					{
-						circle(cur_img, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp]
-							, draw_R, cv::Scalar(0, 0, 255), draw_thick);
-					}
-				}
 
-				if (cur_target_type_cal == Target_type::Chess_Board_type)
-				{
+					double draw_R = draw_R_sum / 5;
+					draw_R = draw_R < 5 ? 5 : draw_R;
+					double draw_thick = draw_R / 2;
+					draw_thick = draw_thick < 1 ? 1 : draw_thick;
+
+					for (int pp = 0; pp < KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1].size(); pp++)
+					{
+						if (KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp].x != 0 &&
+							KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp].y != 0)
+						{
+							circle(cur_img, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp]
+								, draw_R, cv::Scalar(0, 0, 255), draw_thick);
+						}
+					}
 					arrowedLine(cur_img, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][0]
 						, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
 						[KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] - 1],
 						cv::Scalar(255, 0, 0), draw_thick, cv::LineTypes::LINE_8, 0, 0.5
 						/ float(KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] - 1));
-				}
-				else if (cur_target_type_cal == Target_type::Ori_Circle_Board_type)
-				{
-					arrowedLine(cur_img, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-						+ cur_target_offset_for_ori_wid - 1]
-						, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-							[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
-							+ cur_target_offset_for_ori_wid + cur_target_incre_for_ori_wid - 1],
-						cv::Scalar(255, 0, 0), draw_thick, cv::LineTypes::LINE_8, 0, 0.5
-						/ float(KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] - 1));
-				}
+					
 
+				}
+				else
+				{
+					if (cur_img.empty())
+					{
+						ui.Detect_view->clear_image();
+						ui.Detect_view->update();
+						return;
+					}
+				}
 			}
 			else
 			{
@@ -1324,13 +1309,105 @@ void Camera_calibration_module::update_show_view()
 			}
 		}
 	}
-	else
+	else if (cur_target_type_cal == Target_type::Ori_Circle_Board_type)
 	{
-		if (cur_img.empty())
+		if ((ui.show_detect_spinBox->value() - 1) < Result_contours_serial[ui.curren_index_spinBox->value() - 1].size())
 		{
-			ui.Detect_view->clear_image();
-			ui.Detect_view->update();
-			return;
+			if (KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] != 0 &&
+				KeyPointHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] != 0)
+			{
+				if (ui.chess_width_size_spinBox->value() == 0 || ui.chess_height_size_spinBox->value() == 0 ||
+					((ui.chess_width_size_spinBox->value() == KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]) &&
+						(ui.chess_height_size_spinBox->value() == KeyPointHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]))
+					)
+				{
+					if (cur_img.empty())
+					{
+						if (ImageWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] > 0 &&
+							ImageHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] > 0)
+						{
+							cur_img = cv::Mat(ImageHeight_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+								, ImageWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1], CV_8UC3, cv::Scalar(255, 255, 255));
+						}
+						else
+						{
+							ui.Detect_view->clear_image();
+							ui.Detect_view->update();
+							return;
+						}
+					}
+					double all_number = 0;
+					double draw_R_sum = 0;
+					auto p_1_temp = KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						+ cur_target_offset_for_ori_wid - 1];
+					auto p_2_temp = KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						+ cur_target_offset_for_ori_wid + cur_target_incre_for_ori_wid - 1];
+					auto p_3_temp = KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						[(cur_target_offset_for_ori_hei + cur_target_incre_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						+ cur_target_offset_for_ori_wid - 1];
+					draw_R_sum += sqrt(pow(p_2_temp.x - p_1_temp.x, 2) + pow(p_2_temp.y - p_1_temp.y, 2));
+					draw_R_sum += sqrt(pow(p_3_temp.x - p_1_temp.x, 2) + pow(p_3_temp.x - p_1_temp.y, 2));
+					draw_R_sum /= (double)(cur_target_incre_for_ori_hei + cur_target_incre_for_ori_wid);
+					double draw_R = draw_R_sum / 5;
+					draw_R = draw_R < 5 ? 5 : draw_R;
+					double draw_thick = draw_R / 2;
+					draw_thick = draw_thick < 1 ? 1 : draw_thick;
+
+					std::vector<std::vector<cv::Point>> Con_temp;
+					for (int pp = 0; pp < Result_contours_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1].size(); pp++)
+					{
+						std::vector<cv::Point> C_tt;
+						for (int qq = 0; qq < Result_contours_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp].size(); qq++)
+						{
+							C_tt.push_back(cv::Point(Result_contours_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp][qq].x,
+								Result_contours_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1][pp][qq].y));
+						}
+						if (C_tt.size() != 0)
+						{
+							Con_temp.push_back(C_tt);
+						}
+					}
+					cv::drawContours(cur_img, Con_temp, -1, cv::Scalar(0, 255, 0), draw_thick);
+					arrowedLine(cur_img, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						+ cur_target_offset_for_ori_wid - 1]
+					, KeyPoint_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						[(cur_target_offset_for_ori_hei - 1) * KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1]
+						+ cur_target_offset_for_ori_wid + cur_target_incre_for_ori_wid - 1],
+						cv::Scalar(255, 0, 0), draw_thick, cv::LineTypes::LINE_8, 0, 0.5
+						/ float(KeyPointWidth_serial[ui.curren_index_spinBox->value() - 1][ui.show_detect_spinBox->value() - 1] - 1));
+
+				}
+				else
+				{
+					if (cur_img.empty())
+					{
+						ui.Detect_view->clear_image();
+						ui.Detect_view->update();
+						return;
+					}
+				}
+			}
+			else
+			{
+				if (cur_img.empty())
+				{
+					ui.Detect_view->clear_image();
+					ui.Detect_view->update();
+					return;
+				}
+			}
+		}
+		else
+		{
+			if (cur_img.empty())
+			{
+				ui.Detect_view->clear_image();
+				ui.Detect_view->update();
+				return;
+			}
 		}
 	}
 
@@ -1598,10 +1675,18 @@ void Camera_calibration_module::update_table_view()
 						new QTableWidgetItem(tr("-.-.-.")));
 					ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 4,
 						new QTableWidgetItem(tr("-.-.-.")));
+					ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 5,
+						new QTableWidgetItem(tr("-.-.-.")));
+					ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 6,
+						new QTableWidgetItem(tr("-.-.-.")));
 					QFont nullFont;
 					QBrush nullColor(Qt::black);
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setFont(nullFont);
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setForeground(nullColor);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setFont(nullFont);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setForeground(nullColor);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setFont(nullFont);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setForeground(nullColor);
 				}
 				else
 				{
@@ -1620,7 +1705,9 @@ void Camera_calibration_module::update_table_view()
 							break;
 						}
 					}
-					if (has_found == -1 || ii >= Result_isenable[has_found].size() || !(Result_isenable[has_found][ii]) ||!(KeyPoint_Enable_serial[camera_valid_index[jj]][ii])
+					if (has_found == -1 || ii >= Result_isenable[has_found].size() 
+						|| !(Result_isenable[has_found][ii]) 
+						||!(KeyPoint_Enable_serial[camera_valid_index[jj]][ii])
 						|| has_found >= Result_re_err.size())
 					{
 						if (Result_isenable.size() != 0)
@@ -1633,15 +1720,47 @@ void Camera_calibration_module::update_table_view()
 						}
 						ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 3,
 							new QTableWidgetItem(tr("--")));
+						ui.tableWidget->setItem(ii* camera_valid_index.size() + jj, 4,
+							new QTableWidgetItem(tr("--")));
+						ui.tableWidget->setItem(ii* camera_valid_index.size() + jj, 5,
+							new QTableWidgetItem(tr("--")));
 						QFont nullFont;
 						QBrush nullColor(Qt::black);
 						ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setFont(nullFont);
 						ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setForeground(nullColor);
+						ui.tableWidget->item(ii* camera_valid_index.size() + jj, 4)->setFont(nullFont);
+						ui.tableWidget->item(ii* camera_valid_index.size() + jj, 4)->setForeground(nullColor);
+						ui.tableWidget->item(ii* camera_valid_index.size() + jj, 5)->setFont(nullFont);
+						ui.tableWidget->item(ii* camera_valid_index.size() + jj, 5)->setForeground(nullColor);
 					}
 					else
 					{
+						double max_err = -std::numeric_limits<double>::max();
+						std::vector<double> er_vec;
+						for (int pp = 0; pp < Result_Re_map[has_found][ii].size(); pp++)
+						{
+							if (Result_Re_map[has_found][ii][pp].x == std::numeric_limits<float>::max()
+								|| Result_Re_map[has_found][ii][pp].x == std::numeric_limits<float>::max())
+							{
+								continue;
+							}
+							double er_now_temp = sqrt(pow(Result_Re_map[has_found][ii][pp].x, 2) +
+								pow(Result_Re_map[has_found][ii][pp].y, 2));
+							er_vec.push_back(er_now_temp);
+							max_err = max_err < er_now_temp ? er_now_temp : max_err;
+						}
+						size_t n_for_vec = er_vec.size() / 2;
+						std::nth_element(er_vec.begin(), er_vec.begin() + n_for_vec, er_vec.end());
+						float median_err = er_vec[n_for_vec];
 						ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 3,
 							new QTableWidgetItem(QString::number(Result_re_err[has_found][ii],'f',4)));
+
+						ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 4,
+							new QTableWidgetItem(QString::number(median_err, 'f', 4)));
+
+						ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 5,
+							new QTableWidgetItem(QString::number(max_err, 'f', 4)));
+
 						ui.tableWidget->item(ii * camera_valid_index.size() + jj, 2)->setCheckState(Qt::Checked);
 						if (ui.reproject_error_limit_doubleSpinBox->isEnabled()
 							&& Result_re_err[has_found][ii] >= ui.reproject_error_limit_doubleSpinBox->value())
@@ -1659,8 +1778,40 @@ void Camera_calibration_module::update_table_view()
 							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setFont(nullFont);
 							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setForeground(nullColor);
 						}
+						if (ui.reproject_error_limit_doubleSpinBox->isEnabled()
+							&& median_err >= ui.reproject_error_limit_doubleSpinBox->value())
+						{
+							QFont nullFont;
+							nullFont.setBold(true);
+							QBrush nullColor(Qt::red);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setFont(nullFont);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setForeground(nullColor);
+						}
+						else
+						{
+							QFont nullFont;
+							QBrush nullColor(Qt::black);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setFont(nullFont);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setForeground(nullColor);
+						}
+						if (ui.reproject_error_limit_doubleSpinBox->isEnabled()
+							&& max_err >= ui.reproject_error_limit_doubleSpinBox->value())
+						{
+							QFont nullFont;
+							nullFont.setBold(true);
+							QBrush nullColor(Qt::red);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setFont(nullFont);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setForeground(nullColor);
+						}
+						else
+						{
+							QFont nullFont;
+							QBrush nullColor(Qt::black);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setFont(nullFont);
+							ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setForeground(nullColor);
+						}
 					}
-					ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 4, 
+					ui.tableWidget->setItem(ii * camera_valid_index.size() + jj, 6, 
 						new QTableWidgetItem(Image_serial_name[camera_valid_index[jj]][ii]));
 				}
 				if (camera_valid_index.size() == 1)
@@ -1675,6 +1826,8 @@ void Camera_calibration_module::update_table_view()
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 2)->setBackground(back_color);
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setBackground(back_color);
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setBackground(back_color);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setBackground(back_color);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 6)->setBackground(back_color);
 				}
 				else
 				{
@@ -1688,6 +1841,8 @@ void Camera_calibration_module::update_table_view()
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 2)->setBackground(back_color);
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 3)->setBackground(back_color);
 					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 4)->setBackground(back_color);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 5)->setBackground(back_color);
+					ui.tableWidget->item(ii * camera_valid_index.size() + jj, 6)->setBackground(back_color);
 				}
 			}
 		}
@@ -3635,6 +3790,14 @@ void Camera_calibration_module::calibration_cameras()
 			{
 				continue;
 			}
+
+			KeyPoint_serial[Image_group_to_index[ii][jj]].clear();
+			Result_contours_serial[Image_group_to_index[ii][jj]].clear();
+			KeyPointWidth_serial[Image_group_to_index[ii][jj]].clear();
+			KeyPointHeight_serial[Image_group_to_index[ii][jj]].clear();
+			ImageWidth_serial[Image_group_to_index[ii][jj]].clear();
+			ImageHeight_serial[Image_group_to_index[ii][jj]].clear();
+
 			oQProgressDialog.setLabelText(tr("Detect for Camera-") + QString("%1").arg(Image_group_to_index[ii][jj] + 1, 2, 10, QLatin1Char('0'))
 			+tr(":") + QString::number(0) + tr("/") + QString::number(Image_group[ii][jj].size()));
 			oQProgressDialog.setRange(0, Image_group[ii][jj].size());
@@ -3646,11 +3809,13 @@ void Camera_calibration_module::calibration_cameras()
 				cv::Mat gray_temp;
 				cv::Size checkerboard_size;
 				std::vector<cv::Point2f> corner_points_cur = {};
+				std::vector<std::vector<cv::Point2f>> edge_points_cur;
 				oQProgressDialog.setValue((kk - 1) < 0 ? 0 : (kk - 1));
 				cv::Mat img_cur = cv::imread(Image_group[ii][jj][kk].toLocal8Bit().toStdString());
 				if (img_cur.empty())
 				{
 					KeyPoint_serial[Image_group_to_index[ii][jj]].push_back(corner_points_cur);
+					Result_contours_serial[Image_group_to_index[ii][jj]].push_back(edge_points_cur);
 					KeyPointWidth_serial[Image_group_to_index[ii][jj]].push_back(0);
 					KeyPointHeight_serial[Image_group_to_index[ii][jj]].push_back(0);
 					ImageWidth_serial[Image_group_to_index[ii][jj]].push_back(0);
@@ -3664,6 +3829,7 @@ void Camera_calibration_module::calibration_cameras()
 				if (oQProgressDialog.wasCanceled())
 				{
 					KeyPoint_serial[Image_group_to_index[ii][jj]].clear();
+					Result_contours_serial[Image_group_to_index[ii][jj]].clear();
 					KeyPointWidth_serial[Image_group_to_index[ii][jj]].clear();
 					KeyPointHeight_serial[Image_group_to_index[ii][jj]].clear();
 					ImageWidth_serial[Image_group_to_index[ii][jj]].clear();
@@ -3683,19 +3849,20 @@ void Camera_calibration_module::calibration_cameras()
 				{
 					std::vector<uchar> list;
 					int useful_corner_num = 0;
-					std::vector<std::vector<cv::Point2f>> edge_points;
 					int circle_wid = ui.chess_width_size_oricircle_spinBox->value();
 					int circle_hei = ui.chess_height_size_oricircle_spinBox->value();
 					int offset_wid = ui.offset_width_size_oricircle_spinBox->value();
 					int offset_hei = ui.offset_height_size_oricircle_spinBox->value();
 					int incre_wid = ui.circle_incre_width_size_oricircle_spinBox->value();
 					int incre_hei = ui.circle_incre_height_size_oricircle_spinBox->value();
-					bool found = ImageDetectMethod::FindCircleGrid(gray_temp, circle_wid, circle_hei,
+					found_fin = ImageDetectMethod::FindCircleGrid(gray_temp, circle_wid, circle_hei,
 						offset_wid, offset_hei, incre_wid, incre_hei,
-						corner_points_cur, list, useful_corner_num, edge_points, ui.max_ratio_spinBox->value(), 1.0 / ui.radius_k_doubleSpinBox->value()
+						corner_points_cur, list, useful_corner_num, edge_points_cur, ui.max_ratio_spinBox->value(), 1.0 / ui.radius_k_doubleSpinBox->value()
 						, ui.min_R_spinBox->value(), ui.max_R_spinBox->value(), ui.max_error_doubleSpinBox->value(), ui.max_arc_spinBox->value(),
 						ui.max_P_spinBox->value(), ui.max_KP_spinBox->value());
-					if (found)
+
+					
+					if (found_fin)
 					{
 						double r_first = sqrt(pow(corner_points_cur[(offset_hei - 1) * circle_wid + offset_wid - 1].x - 
 							corner_points_cur[(offset_hei - 1) * circle_wid + offset_wid + incre_wid - 1].x, 2) 
@@ -3730,45 +3897,59 @@ void Camera_calibration_module::calibration_cameras()
 						}
 						if (!(valid_pp < (circle_hei * circle_wid) * 0.5 || valid_pp < 8))
 						{
-							cv::Mat Circle_image_New;
 							cv::Mat per_tf = cv::findHomography(AffinePointsSrc, AffinePointsDst, cv::RANSAC);
-							cv::warpPerspective(gray_temp, Circle_image_New, per_tf, cv::Size((circle_hei + 1) * inter_c, (circle_wid + 1) * inter_c), CV_INTER_AREA);
-							corner_points_cur.clear();
-							found_fin = ImageDetectMethod::FindCircleGrid(Circle_image_New, circle_wid, circle_hei,
-								offset_wid, offset_hei, incre_wid, incre_hei,
-								corner_points_cur, list, useful_corner_num, edge_points, 1.2, 1.0 / ui.radius_k_doubleSpinBox->value()
-								, ui.min_R_spinBox->value() * r_multi, ui.max_R_spinBox->value() * r_multi, ui.max_error_doubleSpinBox->value(), ui.max_arc_spinBox->value(),
-								ui.max_P_spinBox->value(), ui.max_KP_spinBox->value());
-							if (found_fin)
+
+							for (unsigned int gg = 0; gg < corner_points_cur.size(); gg++)
 							{
-								for (unsigned int gg = 0; gg < corner_points_cur.size(); gg++)
+								if (corner_points_cur[gg].x == 0 && corner_points_cur[gg].y == 0)
 								{
-									if (corner_points_cur[gg].x == 0 && corner_points_cur[gg].y == 0)
-									{
-										continue;
-									}
+									continue;
+								}
+
+								std::vector<cv::Point2f> con_new;
+								for (int tt = 0; tt < edge_points_cur[gg].size(); tt++)
+								{
 									cv::Mat_<double> mat_pt(3, 1);
-									mat_pt(0, 0) = corner_points_cur[gg].x;
-									mat_pt(1, 0) = corner_points_cur[gg].y;
+									mat_pt(0, 0) = edge_points_cur[gg][tt].x;
+									mat_pt(1, 0) = edge_points_cur[gg][tt].y;
 									mat_pt(2, 0) = 1;
-									cv::Mat mat_pt_view = per_tf.inv() * mat_pt;
+									cv::Mat mat_pt_view = per_tf * mat_pt;
 									double a1 = mat_pt_view.at<double>(0, 0);
 									double a2 = mat_pt_view.at<double>(1, 0);
 									double a3 = mat_pt_view.at<double>(2, 0);
-									double new_x = a1 * 1.0 / a3;
-									double new_y = a2 * 1.0 / a3;
-									corner_points_cur[gg].x = new_x;
-									corner_points_cur[gg].y = new_y;
+									con_new.push_back(cv::Point2f(a1 / a3, a2 / a3));
 								}
-								checkerboard_size.width = circle_wid + 1;
-								checkerboard_size.height = circle_hei + 1;
-							}
-							else
-							{
-								corner_points_cur.clear();
+								cv::RotatedRect rRect = fitEllipseAMS(con_new);
+								if (isnan(rRect.center.x) || isinf(rRect.center.x))
+								{
+									continue;
+								}
+								if (isnan(rRect.center.y) || isinf(rRect.center.y))
+								{
+									continue;
+								}
+								if (isnan(rRect.size.width) || isinf(rRect.size.width))
+								{
+									continue;
+								}
+								if (isnan(rRect.size.height) || isinf(rRect.size.height))
+								{
+									continue;
+								}
+								cv::Mat_<double> mat_pt_inv(3, 1);
+								mat_pt_inv(0, 0) = rRect.center.x;
+								mat_pt_inv(1, 0) = rRect.center.y;
+								mat_pt_inv(2, 0) = 1;
+								cv::Mat mat_pt_view = per_tf.inv() * mat_pt_inv;
+								double a1 = mat_pt_view.at<double>(0, 0);
+								double a2 = mat_pt_view.at<double>(1, 0);
+								double a3 = mat_pt_view.at<double>(2, 0);
+								corner_points_cur[gg].x = a1 / a3;
+								corner_points_cur[gg].y = a2 / a3;
 							}
 						}
-
+						checkerboard_size.width = circle_wid + 1;
+						checkerboard_size.height = circle_hei + 1;
 					}
 					else
 					{
@@ -3780,6 +3961,7 @@ void Camera_calibration_module::calibration_cameras()
 				if (oQProgressDialog.wasCanceled())
 				{
 					KeyPoint_serial[Image_group_to_index[ii][jj]].clear();
+					Result_contours_serial[Image_group_to_index[ii][jj]].clear();
 					KeyPointWidth_serial[Image_group_to_index[ii][jj]].clear();
 					KeyPointHeight_serial[Image_group_to_index[ii][jj]].clear();
 					ImageWidth_serial[Image_group_to_index[ii][jj]].clear();
@@ -3790,6 +3972,7 @@ void Camera_calibration_module::calibration_cameras()
 				if (found_fin && corner_points_cur.size() > 2)
 				{
 					KeyPoint_serial[Image_group_to_index[ii][jj]].push_back(corner_points_cur);
+					Result_contours_serial[Image_group_to_index[ii][jj]].push_back(edge_points_cur);
 					KeyPointWidth_serial[Image_group_to_index[ii][jj]].push_back(checkerboard_size.width - 1);
 					KeyPointHeight_serial[Image_group_to_index[ii][jj]].push_back(checkerboard_size.height - 1);
 					ImageWidth_serial[Image_group_to_index[ii][jj]].push_back(img_temp.cols);
@@ -3798,6 +3981,7 @@ void Camera_calibration_module::calibration_cameras()
 				else
 				{
 					KeyPoint_serial[Image_group_to_index[ii][jj]].push_back(corner_points_cur);
+					Result_contours_serial[Image_group_to_index[ii][jj]].push_back(edge_points_cur);
 					KeyPointWidth_serial[Image_group_to_index[ii][jj]].push_back(0);
 					KeyPointHeight_serial[Image_group_to_index[ii][jj]].push_back(0);
 					ImageWidth_serial[Image_group_to_index[ii][jj]].push_back(img_temp.cols);
@@ -3813,6 +3997,7 @@ void Camera_calibration_module::calibration_cameras()
 				if (oQProgressDialog.wasCanceled())
 				{
 					KeyPoint_serial[Image_group_to_index[ii][jj]].clear();
+					Result_contours_serial[Image_group_to_index[ii][jj]].clear();
 					KeyPointWidth_serial[Image_group_to_index[ii][jj]].clear();
 					KeyPointHeight_serial[Image_group_to_index[ii][jj]].clear();
 					ImageWidth_serial[Image_group_to_index[ii][jj]].clear();
@@ -4529,10 +4714,10 @@ void Camera_calibration_module::calibration_cameras()
 			}
 		}
 
-		for (int jj = 0; jj < Result_update_calib_points[0].size(); jj++)
-		{
-			std::cout << Result_update_calib_points[0][jj].x << "\t" << Result_update_calib_points[0][jj].y << "\t" << Result_update_calib_points[0][jj].z << "\n";
-		}
+		//for (int jj = 0; jj < Result_update_calib_points[0].size(); jj++)
+		//{
+		//	std::cout << Result_update_calib_points[0][jj].x << "\t" << Result_update_calib_points[0][jj].y << "\t" << Result_update_calib_points[0][jj].z << "\n";
+		//}
 
 		//valid
 		if (cam_model_ui->ui.verify_checkBox->isChecked())
@@ -5049,6 +5234,7 @@ void Camera_calibration_module::clear_all_data()
 		Image_serial_name[ii].clear();
 		KeyPoint_Enable_serial[ii].clear();
 		KeyPoint_serial[ii].clear();
+		Result_contours_serial[ii].clear();
 		ImageWidth_serial[ii].clear();
 		ImageHeight_serial[ii].clear();
 		KeyPointWidth_serial[ii].clear();
@@ -6388,10 +6574,10 @@ void Camera_calibration_module::read_CalibrationeResult_file(QString path_read)
 					}
 					return;
 				}
-				if (temp_err_x == -1 || temp_err_y == -1 || !camera_enable_only)
+				if (temp_err_x == std::numeric_limits<double>::max() || temp_err_y == std::numeric_limits<double>::max() || !camera_enable_only)
 				{
-					temp_err_x = 0;
-					temp_err_y = 0;
+					temp_err_x = std::numeric_limits<double>::max();
+					temp_err_y = std::numeric_limits<double>::max();
 				}
 				kp_temp.push_back(cv::Point2f(temp_x, temp_y));
 				kp_err_temp.push_back(cv::Point2f(temp_err_x, temp_err_y));
@@ -7734,8 +7920,8 @@ void Camera_calibration_module::save_CalibrationeResult_file(QString path_save)
 					}
 					else
 					{
-						err_x = -1;
-						err_y = -1;
+						err_x = std::numeric_limits<double>::max();
+						err_y = std::numeric_limits<double>::max();
 					}
 					return_size = fwrite(&err_x, sizeof(double), 1, f);
 					if (return_size != 1)
@@ -7933,11 +8119,11 @@ void Camera_calibration_module::save_CalibrationeResult_file_csv(QString path_sa
 					{
 						if (pp == (corn_number - 1))
 						{
-							txtOutPut << "-1" << ",";
+							txtOutPut << "NAN" << ",";
 						}
 						else
 						{
-							txtOutPut << "-1" << "\n";
+							txtOutPut << "NAN" << "\n";
 						}
 					}
 				}
@@ -7959,11 +8145,11 @@ void Camera_calibration_module::save_CalibrationeResult_file_csv(QString path_sa
 					{
 						if (pp == (corn_number - 1))
 						{
-							txtOutPut << "-1" << ",";
+							txtOutPut << "NAN" << ",";
 						}
 						else
 						{
-							txtOutPut << "-1" << "\n";
+							txtOutPut << "NAN" << "\n";
 						}
 					}
 				}
@@ -8129,11 +8315,11 @@ void Camera_calibration_module::save_CalibrationeResult_file_txt(QString path_sa
 					{
 						if (pp == (corn_number - 1))
 						{
-							txtOutPut << "-1" << "\t";
+							txtOutPut << "NAN" << "\t";
 						}
 						else
 						{
-							txtOutPut << "-1" << "\n";
+							txtOutPut << "NAN" << "\n";
 						}
 					}
 				}
@@ -8155,11 +8341,11 @@ void Camera_calibration_module::save_CalibrationeResult_file_txt(QString path_sa
 					{
 						if (pp == (corn_number - 1))
 						{
-							txtOutPut << "-1" << "\t";
+							txtOutPut << "NAN" << "\t";
 						}
 						else
 						{
-							txtOutPut << "-1" << "\n";
+							txtOutPut << "NAN" << "\n";
 						}
 					}
 				}

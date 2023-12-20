@@ -59,8 +59,8 @@
     <LibraryPath>C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft;C:\Build\Lib\glog-0.6.0\lib;C:\Build\Lib\gflags-2.2.2\lib;C:\Build\Lib\ceres-solver-2.1.0\lib;C:\Build\Lib\Opencv\x64\vc17\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>C:\Program Files\MATLAB\R2022b\extern\include;C:\Build\Lib\gflags-2.2.2\include;C:\Build\Lib\glog-0.6.0\include;C:\Build\Lib\eigen-3.4.0\include\eigen3\Eigen;C:\Build\Lib\eigen-3.4.0\include\eigen3;C:\Build\Lib\ceres-solver-2.1.0\include;C:\Build\Lib\Opencv\include\opencv2;C:\Build\Lib\Opencv\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft;C:\Build\Lib\glog-0.6.0\lib;C:\Build\Lib\gflags-2.2.2\lib;C:\Build\Lib\ceres-solver-2.1.0\lib;C:\Build\Lib\Opencv\x64\vc17\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\MATLAB\R2022b\extern\include;C:\Build\Lib\gflags-2.2.2\include;C:\Build\Lib\glog-0.6.0\include;C:\Build\Lib\eigen-3.4.0\include\eigen3\Eigen;C:\Build\Lib\eigen-3.4.0\include\eigen3;C:\Build\Lib\ceres-solver-2.1.0-nocuda\include;C:\Build\Lib\Opencv\include\opencv2;C:\Build\Lib\Opencv\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\MATLAB\R2022b\extern\lib\win64\microsoft;C:\Build\Lib\glog-0.6.0\lib;C:\Build\Lib\gflags-2.2.2\lib;C:\Build\Lib\ceres-solver-2.1.0-nocuda\lib;C:\Build\Lib\Opencv\x64\vc17\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
@@ -127,6 +127,7 @@
     <ClCompile Include="Feature_Detect\Matlab2C\get_chessborad_pixel_initialize.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\get_chessborad_pixel_rtwutil.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\get_chessborad_pixel_terminate.cpp" />
+    <ClCompile Include="Feature_Detect\Matlab2C\get_fx_fy.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\halideEvalImpl.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\imdilate.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\imedge_2d.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Feature_Detect\Matlab2C\squeeze.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\subPixelLocation.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\sum.cpp" />
+    <ClCompile Include="Feature_Detect\Matlab2C\sumprod.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\svd.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\svd1.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\unsafeSxfun.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="Feature_Detect\Matlab2C\xrot.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\xrotg.cpp" />
     <ClCompile Include="Feature_Detect\Matlab2C\xswap.cpp" />
+    <ClCompile Include="Feature_Detect\Matlab2C\xzsvdc.cpp" />
     <ClCompile Include="Feature_Detect\Opencv\circlesgrid.cpp" />
     <ClCompile Include="plot_show\qcustomplot.cpp" />
     <QtRcc Include="Camera_calibration_module.qrc" />
@@ -182,12 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera_calibration\Camera_calibration.h" />
-    <ClInclude Include="Feature_Detect\Opencv\circlesgrid.hpp" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
-    <QtMoc Include="Camera_op\camshowlabel.h" />
-    <ClInclude Include="Feature_Detect\CMMHelp.h" />
-    <ClInclude Include="Feature_Detect\CodeID.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\algbwmorph.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\binaryMinOrMax.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\bsxfun.h" />
@@ -211,6 +208,7 @@
     <ClInclude Include="Feature_Detect\Matlab2C\get_chessborad_pixel_rtwutil.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\get_chessborad_pixel_terminate.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\get_chessborad_pixel_types.h" />
+    <ClInclude Include="Feature_Detect\Matlab2C\get_fx_fy.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\halideEvalImpl.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\HalideRuntime.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\imdilate.h" />
@@ -251,6 +249,7 @@
     <ClInclude Include="Feature_Detect\Matlab2C\squeeze.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\subPixelLocation.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\sum.h" />
+    <ClInclude Include="Feature_Detect\Matlab2C\sumprod.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\svd.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\svd1.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\tmwtypes.h" />
@@ -262,10 +261,23 @@
     <ClInclude Include="Feature_Detect\Matlab2C\xrot.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\xrotg.h" />
     <ClInclude Include="Feature_Detect\Matlab2C\xswap.h" />
+    <ClInclude Include="Feature_Detect\Matlab2C\xzsvdc.h" />
+    <ClInclude Include="Feature_Detect\Opencv\circlesgrid.hpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
+    <QtMoc Include="Camera_op\camshowlabel.h" />
+    <ClInclude Include="Feature_Detect\CMMHelp.h" />
+    <ClInclude Include="Feature_Detect\CodeID.h" />
     <QtMoc Include="Feature_Detect\imagedetectmethod.h" />
     <ClInclude Include="Format_Document.h" />
     <QtMoc Include="plot_show\qcustomplot.h" />
     <QtMoc Include="Language\Linguist.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Camera_calibration_module.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon\pet.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Feature_Detect\Matlab2C\buildInfo.mat" />
@@ -276,12 +288,6 @@
     <Object Include="Feature_Detect\Matlab2C\morphop2_halide_imdilate_float32_host.obj" />
     <Object Include="Feature_Detect\Matlab2C\morphop2_halide_imerode_float32_host.obj" />
     <Object Include="Feature_Detect\Matlab2C\_halideRuntime.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Camera_calibration_module.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icon\pet.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

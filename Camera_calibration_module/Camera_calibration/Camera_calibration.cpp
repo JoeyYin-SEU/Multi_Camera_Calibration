@@ -555,7 +555,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame(int image_width, int image_h
 				}
 				else
 				{
-					err_temp.push_back(cv::Point2f(-1, -1));
+					err_temp.push_back(cv::Point2f(std::numeric_limits<float>::max(), std::numeric_limits<float>::max()));
 				}
 			}
 			Re_project_Map.push_back(err_temp);
@@ -736,7 +736,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame(int image_width, int image_h
 				}
 				else
 				{
-					err_temp.push_back(cv::Point2f(-1, -1));
+					err_temp.push_back(cv::Point2f(std::numeric_limits<float>::max(), std::numeric_limits<float>::max()));
 				}
 			}
 			Re_project_Map.push_back(err_temp);
@@ -1044,7 +1044,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize(int points_nu
 				}
 				else
 				{
-					err_temp.push_back(cv::Point2f(-1, -1));
+					err_temp.push_back(cv::Point2f(std::numeric_limits<float>::max(), std::numeric_limits<float>::max()));
 				}
 			}
 			Re_project_Map.push_back(err_temp);
@@ -1325,7 +1325,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize(int points_nu
 				}
 				else
 				{
-					err_temp.push_back(cv::Point2f(-1, -1));
+					err_temp.push_back(cv::Point2f(std::numeric_limits<float>::max(), std::numeric_limits<float>::max()));
 				}
 			}
 			Re_project_Map.push_back(err_temp);
@@ -2012,7 +2012,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize_Dual(int poin
 					}
 					else
 					{
-						err_temp.push_back(cv::Point2f(-1, -1));
+						err_temp.push_back(cv::Point2f(std::numeric_limits<float>::max(), std::numeric_limits<float>::max()));
 					}
 				}
 				err_temp_all.push_back(err_temp);
@@ -2319,7 +2319,7 @@ void CameraCalibrate_Ceres::calculate_camera_parame_fixed_optimize_Dual(int poin
 					}
 					else
 					{
-						err_temp.push_back(cv::Point2f(-1, -1));
+						err_temp.push_back(cv::Point2f(std::numeric_limits<float>::max(), std::numeric_limits<float>::max()));
 					}
 				}
 				err_temp_all.push_back(err_temp);

@@ -75,6 +75,7 @@ private:
 
 	std::vector<QString>  Image_serial_name[MAX_CALIBRAT_CAMERA];
 	std::vector< std::vector<cv::Point2f>>  KeyPoint_serial[MAX_CALIBRAT_CAMERA];
+	std::vector<std::vector<std::vector<cv::Point2f>>> Result_contours_serial[MAX_CALIBRAT_CAMERA];
 	std::vector<unsigned int>  ImageWidth_serial[MAX_CALIBRAT_CAMERA];
 	std::vector<unsigned int>  ImageHeight_serial[MAX_CALIBRAT_CAMERA];
 	std::vector<unsigned int>  KeyPointWidth_serial[MAX_CALIBRAT_CAMERA];
